@@ -1,0 +1,113 @@
+<mat-drawer-container
+  class="example-container"
+  hasBackdrop="True"
+  autosize
+  style="height: 100vh"
+>
+  <mat-toolbar style="border-bottom: 1px solid black">
+    <!-- <img class="logo" alt="Logo" style="height: 40px; margin-right: 16px;" /> -->
+    <button
+      mat-icon-button
+      class="example-icon"
+      (click)="drawer.toggle()"
+      aria-label="Example icon-button with menu icon"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
+  </mat-toolbar>
+  <mat-drawer style="height: 100%" #drawer class="example-sidenav" mode="over">
+    <h2
+      style="
+        border-bottom: 2px solid red;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      "
+    ></h2>
+    <div>
+      <div style="margin-top: 20px">
+        <button mat-raised-button color="primary" [routerLink]="'/home'">
+          <mat-icon>home</mat-icon>Home
+        </button>
+      </div>
+      <div style="margin-top: 20px">
+        <button
+          mat-raised-button
+          color="primary"
+          [routerLink]="'/blood-request'"
+        >
+          <mat-icon>local_hospital</mat-icon>Blood Request
+        </button>
+      </div>
+      <div style="margin-top: 20px">
+        <button mat-raised-button color="primary" (click)="onLogout()">
+          <mat-icon>logout</mat-icon>logout
+        </button>
+      </div>
+    </div>
+  </mat-drawer>
+
+  <div class="container">
+    <div class="card" *ngFor="let item of donor_information_Of_A_Positive">
+      <h2>A+</h2>
+      <div class="count">{{ item.total_blood_of_A_Positive }}</div>
+      <div class="icon">🩸</div>
+    </div>
+    <div class="card" *ngFor="let item of donor_information_Of_B_Positive">
+      <h2>B+</h2>
+      <div class="count">{{ item.total_blood_of_B_Positive }}</div>
+      <div class="icon">🩸</div>
+    </div>
+    <div class="card" *ngFor="let item of donor_information_Of_O_Positive">
+      <h2>O+</h2>
+      <div class="count">{{ item.total_blood_of_O_Positive }}</div>
+      <div class="icon">🩸</div>
+    </div>
+    <div class="card" *ngFor="let item of donor_information_Of_AB_Positive">
+      <h2>AB+</h2>
+      <div class="count">{{ item.total_blood_of_AB_Positive }}</div>
+      <div class="icon">🩸</div>
+    </div>
+    <div class="card" *ngFor="let item of donor_information_Of_A_Negative">
+      <h2>A-</h2>
+      <div class="count">{{ item.total_blood_of_A_Negavtive }}</div>
+      <div class="icon">🩸</div>
+    </div>
+    <div class="card" *ngFor="let item of donor_information_Of_B_Negative">
+      <h2>B-</h2>
+      <div class="count">{{ item.total_blood_of_B_Negavtive }}</div>
+      <div class="icon">🩸</div>
+    </div>
+    <div class="card" *ngFor="let item of donor_information_Of_O_Negative">
+      <h2>O-</h2>
+      <div class="count">{{ item.total_blood_of_O_Negavtive }}</div>
+      <div class="icon">🩸</div>
+    </div>
+    <div class="card" *ngFor="let item of donor_information_Of_AB_Negative">
+      <h2>AB-</h2>
+      <div class="count">{{ item.total_blood_of_AB_Negavtive }}</div>
+      <div class="icon">🩸</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="card">
+      <h2>Total Donors</h2>
+      <div class="count">{{ getTotal[0]?.totalDonor }}</div>
+      <div class="icon">👥</div>
+    </div>
+    <div class="card">
+      <h2>Total Requests</h2>
+      <div class="count">{{ totalReq[0]?.totalRequest }}3</div>
+      <div class="icon">🔄</div>
+    </div>
+    <div class="card">
+      <h2>Approved Requests</h2>
+      <div class="count">{{ donorInfo[0]?.totalApprove }}</div>
+      <div class="icon">✔️</div>
+    </div>
+    <div class="card">
+      <h2>Total Blood Unit (in ml)</h2>
+      <div class="count">{{ getTotal[0]?.totalBlood }}</div>
+      <div class="icon">💧</div>
+    </div>
+  </div>
+</mat-drawer-container>

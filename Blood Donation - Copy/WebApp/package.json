@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@angular/cli": "^18.0.7",
+    "http": "^0.0.1-security"
+  }
+}

@@ -1,0 +1,701 @@
+<!-- <app-sidebar></app-sidebar> -->
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 0.8)"
+  size="medium"
+  color="#000000"
+  type="ball-atom"
+  [fullScreen]="true"
+>
+  <p style="color: white">Loading...</p>
+</ngx-spinner>
+<div class="login-container">
+  <div id="page3" style="align-items: center; justify-content: center">
+    <h2 style="margin-left: 550px; margin-bottom: 350px">
+      A single drop of your
+      <b style="color: red; font-family: algerian">Blood 🩸</b> could be a drop
+      of
+      <b style="color: green; font-family: Lucida Calligraphy">Life 🧬</b> for
+      someone else.<br />
+      Maintain a healthy lifestyle and donate blood. <br />The gift of blood is
+      the gift of life. Be a hero, donate blood,<br />
+      and give someone a chance to live.
+    </h2>
+    <img
+      id="colon1"
+      src="https://eiwgew27fhz.exactdn.com/wp-content/themes/puttosaurus/img/quote-left.svg"
+      alt=""
+    />
+    <img
+      id="colon2"
+      src="https://eiwgew27fhz.exactdn.com/wp-content/themes/puttosaurus/img/quote-right.svg"
+      alt=""
+    />
+  </div>
+</div>
+
+<div class="login">
+  <button style="width: 100px" (click)="loginModel(donor)">
+    <b>Login</b>
+  </button>
+</div>
+
+<ng-template #donor let-c="close">
+  <div class="formArea">
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="form">
+      <div class="form-group">
+        <h2 style="justify-content: center; align-items: center">Login</h2>
+        <label for="email">Email:</label>
+        <input type="email" id="email" formControlName="email" />
+        <div
+          *ngIf="email?.invalid && (email?.dirty || email?.touched)"
+          class="error"
+        >
+          <div *ngIf="email?.errors?.['required']">Email is required.</div>
+          <div *ngIf="email?.errors?.['email']">Invalid email format.</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" formControlName="password" />
+        <div
+          *ngIf="password?.invalid && (password?.dirty || password?.touched)"
+          class="error"
+        >
+          <div *ngIf="password?.errors?.['required']">
+            Password is required.
+          </div>
+          <div *ngIf="password?.errors?.['minlength']">
+            Password must be at least 6 characters long.
+          </div>
+        </div>
+      </div>
+      <div class="form-group flex-row role-selection">
+        <label for="roles">Role:</label>
+        <div class="custom-control custom-radio">
+          <input id="recipient" type="radio" value="recipient" name="roles" formControlName="roles" />
+          <label for="recipient">Recipient</label>
+        </div>
+        <div class="custom-control custom-radio">
+          <input id="donor" type="radio" value="donor" name="roles" formControlName="roles" />
+          <label for="donor">Donor</label>
+        </div>
+      </div>
+      <button
+        type="submit"
+        [disabled]="loginForm.invalid"
+        (click)="c('Close click')"
+      >
+        Login
+      </button>
+      <div
+        class="register-link-donor"
+        (click)="c('Close click')"
+        style="padding-top: 15px"
+      >
+        <button (click)="registrationDonorModel(donorRegi)">
+          Want to register as Donor?
+        </button>
+      </div>
+      <div
+        class="register-link-donor"
+        (click)="c('Close click')"
+        style="padding-top: 15px"
+      >
+        <button (click)="registrationRecipientModel(RecipientRegi)">
+          Want to register as Recipient?
+        </button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+<ng-template #donorRegi let-c="close">
+  <div class="formArea">
+    <form
+      [formGroup]="registrationForm"
+      (ngSubmit)="onDonorRegistration()"
+      enctype="multipart/form-data"
+    >
+      <h2>Donor Registration</h2>
+
+      <div class="form-group">
+        <label for="first_name">First Name:</label>
+        <input type="text" id="first_name" formControlName="first_name" />
+        <div
+          *ngIf="
+            registrationForm.get('first_name')?.invalid &&
+            (registrationForm.get('first_name')?.touched ||
+              registrationForm.get('first_name')?.dirty)
+          "
+          class="error"
+        >
+          <small
+            *ngIf="registrationForm.get('first_name')?.errors?.['required']"
+            >First name is required.</small
+          >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="last_name">Last Name:</label>
+        <input type="text" id="last_name" formControlName="last_name" />
+        <div
+          *ngIf="
+            registrationForm.get('last_name')?.invalid &&
+            (registrationForm.get('last_name')?.touched ||
+              registrationForm.get('last_name')?.dirty)
+          "
+          class="error"
+        >
+          <small *ngIf="registrationForm.get('last_name')?.errors?.['required']"
+            >Last name is required.</small
+          >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" formControlName="email" />
+        <div
+          *ngIf="
+            registrationForm.get('email')?.invalid &&
+            (registrationForm.get('email')?.touched ||
+              registrationForm.get('email')?.dirty)
+          "
+          class="error"
+        >
+          <small *ngIf="registrationForm.get('email')?.errors?.['required']"
+            >Email is required.</small
+          >
+          <small *ngIf="registrationForm.get('email')?.errors?.['email']"
+            >Invalid email format.</small
+          >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" formControlName="password" />
+        <div
+          *ngIf="
+            registrationForm.get('password')?.invalid &&
+            (registrationForm.get('password')?.touched ||
+              registrationForm.get('password')?.dirty)
+          "
+          class="error"
+        >
+          <small *ngIf="registrationForm.get('password')?.errors?.['required']"
+            >Password is required.</small
+          >
+          <small *ngIf="registrationForm.get('password')?.errors?.['minlength']"
+            >Password must be at least 6 characters long.</small
+          >
+        </div>
+      </div>
+
+      <div class="form-group flex">
+        <div>
+          <label for="gender">Gender:</label>
+          <select id="gender" formControlName="gender">
+            <option value="">Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+          <div
+            *ngIf="
+              registrationForm.get('gender')?.invalid &&
+              (registrationForm.get('gender')?.touched ||
+                registrationForm.get('gender')?.dirty)
+            "
+            class="error"
+          >
+            <small *ngIf="registrationForm.get('gender')?.errors?.['required']"
+              >Gender is required.</small
+            >
+          </div>
+        </div>
+
+        <div>
+          <label for="blood_group">Blood Group:</label>
+          <select id="blood_group" formControlName="blood_group">
+            <option value="">Select Blood Group</option>
+            <option value="A+">A+</option>
+            <option value="A-">A-</option>
+            <option value="B+">B+</option>
+            <option value="B-">B-</option>
+            <option value="O+">O+</option>
+            <option value="O-">O-</option>
+            <option value="AB+">AB+</option>
+            <option value="AB-">AB-</option>
+          </select>
+          <div
+            *ngIf="
+              registrationForm.get('blood_group')?.invalid &&
+              (registrationForm.get('blood_group')?.touched ||
+                registrationForm.get('blood_group')?.dirty)
+            "
+            class="error"
+          >
+            <small
+              *ngIf="registrationForm.get('blood_group')?.errors?.['required']"
+              >Blood group is required.</small
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group flex">
+        <div>
+          <label for="phone_number">Phone Number:</label>
+          <input type="text" id="phone_number" formControlName="phone_number" />
+          <div
+            *ngIf="
+              registrationForm.get('phone_number')?.invalid &&
+              (registrationForm.get('phone_number')?.touched ||
+                registrationForm.get('phone_number')?.dirty)
+            "
+            class="error"
+          >
+            <small
+              *ngIf="registrationForm.get('phone_number')?.errors?.['required']"
+              >Phone number is required.</small
+            >
+          </div>
+        </div>
+
+        <div>
+          <label for="birth_date">Date of Birth:</label>
+          <input type="date" id="birth_date" formControlName="birth_date" />
+          <div
+            *ngIf="
+              registrationForm.get('birth_date')?.invalid &&
+              (registrationForm.get('birth_date')?.touched ||
+                registrationForm.get('birth_date')?.dirty)
+            "
+            class="error"
+          >
+            <small
+              *ngIf="registrationForm.get('birth_date')?.errors?.['required']"
+              >Date of birth is required.</small
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="address">Address:</label>
+        <textarea id="address" formControlName="address"></textarea>
+        <div
+          *ngIf="
+            registrationForm.get('address')?.invalid &&
+            (registrationForm.get('address')?.touched ||
+              registrationForm.get('address')?.dirty)
+          "
+          class="error"
+        >
+          <small *ngIf="registrationForm.get('address')?.errors?.['required']"
+            >Address is required.</small
+          >
+        </div>
+      </div>
+
+      <div class="form-group flex">
+        <div>
+          <label for="last_donation_date">Last Donation Date:</label>
+          <input
+            type="date"
+            id="last_donation_date"
+            formControlName="last_donation_date"
+          />
+          <div
+            *ngIf="
+              registrationForm.get('last_donation_date')?.invalid &&
+              (registrationForm.get('last_donation_date')?.touched ||
+                registrationForm.get('last_donation_date')?.dirty)
+            "
+            class="error"
+          >
+            <small
+              *ngIf="registrationForm.get('last_donation_date')?.errors?.['required']"
+              >Last donation date is required.</small
+            >
+          </div>
+        </div>
+
+        <div>
+          <label for="blood_donate_in_ml">Blood Donate In ML:</label>
+          <input
+            type="number"
+            id="blood_donate_in_ml"
+            formControlName="blood_donate_in_ml"
+          />
+          <div
+            *ngIf="
+              registrationForm.get('blood_donate_in_ml')?.invalid &&
+              (registrationForm.get('blood_donate_in_ml')?.touched ||
+                registrationForm.get('blood_donate_in_ml')?.dirty)
+            "
+            class="error"
+          >
+            <small
+              *ngIf="registrationForm.get('blood_donate_in_ml')?.errors?.['required']"
+              >Blood donate in ML is required.</small
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group flex">
+        <div>
+          <label for="city">City:</label>
+          <input type="text" id="city" formControlName="city" />
+          <div
+            *ngIf="
+              registrationForm.get('city')?.invalid &&
+              (registrationForm.get('city')?.touched ||
+                registrationForm.get('city')?.dirty)
+            "
+            class="error"
+          >
+            <small *ngIf="registrationForm.get('city')?.errors?.['required']"
+              >City is required.</small
+            >
+          </div>
+        </div>
+
+        <div>
+          <label for="state">State:</label>
+          <input type="text" id="state" formControlName="state" />
+          <div
+            *ngIf="
+              registrationForm.get('state')?.invalid &&
+              (registrationForm.get('state')?.touched ||
+                registrationForm.get('state')?.dirty)
+            "
+            class="error"
+          >
+            <small *ngIf="registrationForm.get('state')?.errors?.['required']"
+              >State is required.</small
+            >
+          </div>
+        </div>
+
+        <div>
+          <label for="country">Country:</label>
+          <input type="text" id="country" formControlName="country" />
+          <div
+            *ngIf="
+              registrationForm.get('country')?.invalid &&
+              (registrationForm.get('country')?.touched ||
+                registrationForm.get('country')?.dirty)
+            "
+            class="error"
+          >
+            <small *ngIf="registrationForm.get('country')?.errors?.['required']"
+              >Country is required.</small
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group flex">
+        <div>
+          <label for="postal_code">Postal Code:</label>
+          <input type="number" id="postal_code" formControlName="postal_code" />
+          <div
+            *ngIf="
+              registrationForm.get('postal_code')?.invalid &&
+              (registrationForm.get('postal_code')?.touched ||
+                registrationForm.get('postal_code')?.dirty)
+            "
+            class="error"
+          >
+            <small
+              *ngIf="registrationForm.get('postal_code')?.errors?.['required']"
+              >Postal code is required.</small
+            >
+          </div>
+        </div>
+
+        <div>
+          <label for="eligible_for_donation">Eligible For Donation:</label>
+          <select
+            id="eligible_for_donation"
+            formControlName="eligible_for_donation"
+          >
+            <option value="">Select</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+          <div
+            *ngIf="
+              registrationForm.get('eligible_for_donation')?.invalid &&
+              (registrationForm.get('eligible_for_donation')?.touched ||
+                registrationForm.get('eligible_for_donation')?.dirty)
+            "
+            class="error"
+          >
+            <small
+              *ngIf="registrationForm.get('eligible_for_donation')?.errors?.['required']"
+              >Eligibility for donation is required.</small
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="health_condition">Health Condition:</label>
+        <input
+          type="text"
+          id="health_condition"
+          formControlName="health_condition"
+        />
+        <div
+          *ngIf="
+            registrationForm.get('health_condition')?.invalid &&
+            (registrationForm.get('health_condition')?.touched ||
+              registrationForm.get('health_condition')?.dirty)
+          "
+          class="error"
+        >
+          <small
+            *ngIf="registrationForm.get('health_condition')?.errors?.['required']"
+            >Health condition is required.</small
+          >
+        </div>
+      </div>
+
+      <button type="submit" (click)="c('Close click')">Register</button>
+    </form>
+  </div>
+</ng-template>
+
+<ng-template #RecipientRegi let-c="close">
+  <div class="formArea">
+    <form
+      [formGroup]="recipientRegistationForm"
+      (ngSubmit)="onRecipientRegistration()"
+      enctype="multipart/form-data"
+    >
+      <h2>Recipient Registration</h2>
+
+      <div class="form-group">
+        <label for="first_name">First Name:</label>
+        <input type="text" id="first_name" formControlName="first_name" />
+        <div
+          *ngIf="
+            recipientRegistationForm.get('first_name')?.invalid &&
+            (recipientRegistationForm.get('first_name')?.touched ||
+              recipientRegistationForm.get('first_name')?.dirty)
+          "
+          class="error"
+        >
+          <small
+            *ngIf="recipientRegistationForm.get('first_name')?.errors?.['required']"
+            >First name is required.</small
+          >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="last_name">Last Name:</label>
+        <input type="text" id="last_name" formControlName="last_name" />
+        <div
+          *ngIf="
+            recipientRegistationForm.get('last_name')?.invalid &&
+            (recipientRegistationForm.get('last_name')?.touched ||
+              recipientRegistationForm.get('last_name')?.dirty)
+          "
+          class="error"
+        >
+          <small
+            *ngIf="recipientRegistationForm.get('last_name')?.errors?.['required']"
+            >Last name is required.</small
+          >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" formControlName="email" />
+        <div
+          *ngIf="
+            recipientRegistationForm.get('email')?.invalid &&
+            (recipientRegistationForm.get('email')?.touched ||
+              recipientRegistationForm.get('email')?.dirty)
+          "
+          class="error"
+        >
+          <small
+            *ngIf="recipientRegistationForm.get('email')?.errors?.['required']"
+            >Email is required.</small
+          >
+          <small
+            *ngIf="recipientRegistationForm.get('email')?.errors?.['email']"
+            >Invalid email format.</small
+          >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" formControlName="password" />
+        <div
+          *ngIf="
+            recipientRegistationForm.get('password')?.invalid &&
+            (recipientRegistationForm.get('password')?.touched ||
+              recipientRegistationForm.get('password')?.dirty)
+          "
+          class="error"
+        >
+          <small
+            *ngIf="recipientRegistationForm.get('password')?.errors?.['required']"
+            >Password is required.</small
+          >
+          <small
+            *ngIf="recipientRegistationForm.get('password')?.errors?.['minlength']"
+            >Password must be at least 6 characters long.</small
+          >
+        </div>
+      </div>
+
+      <div class="form-group flex">
+        <div>
+          <label for="gender">Gender:</label>
+          <select id="gender" formControlName="gender">
+            <option value="">Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+          <div
+            *ngIf="
+              recipientRegistationForm.get('gender')?.invalid &&
+              (recipientRegistationForm.get('gender')?.touched ||
+                recipientRegistationForm.get('gender')?.dirty)
+            "
+            class="error"
+          >
+            <small
+              *ngIf="recipientRegistationForm.get('gender')?.errors?.['required']"
+              >Gender is required.</small
+            >
+          </div>
+        </div>
+
+        <div>
+          <label for="blood_group">Blood Group:</label>
+          <select id="blood_group" formControlName="blood_group">
+            <option value="">Select Blood Group</option>
+            <option value="A+">A+</option>
+            <option value="A-">A-</option>
+            <option value="B+">B+</option>
+            <option value="B-">B-</option>
+            <option value="O+">O+</option>
+            <option value="O-">O-</option>
+            <option value="AB+">AB+</option>
+            <option value="AB-">AB-</option>
+          </select>
+          <div
+            *ngIf="
+              recipientRegistationForm.get('blood_group')?.invalid &&
+              (recipientRegistationForm.get('blood_group')?.touched ||
+                recipientRegistationForm.get('blood_group')?.dirty)
+            "
+            class="error"
+          >
+            <small
+              *ngIf="recipientRegistationForm.get('blood_group')?.errors?.['required']"
+              >Blood group is required.</small
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group flex">
+        <div>
+          <label for="phone_number">Phone Number:</label>
+          <input type="text" id="phone_number" formControlName="phone_number" />
+          <div
+            *ngIf="
+              recipientRegistationForm.get('phone_number')?.invalid &&
+              (recipientRegistationForm.get('phone_number')?.touched ||
+                recipientRegistationForm.get('phone_number')?.dirty)
+            "
+            class="error"
+          >
+            <small
+              *ngIf="recipientRegistationForm.get('phone_number')?.errors?.['required']"
+              >Phone number is required.</small
+            >
+          </div>
+        </div>
+
+        <div>
+          <label for="birth_date">Date of Birth:</label>
+          <input type="date" id="birth_date" formControlName="birth_date" />
+          <div
+            *ngIf="
+              recipientRegistationForm.get('birth_date')?.invalid &&
+              (recipientRegistationForm.get('birth_date')?.touched ||
+                recipientRegistationForm.get('birth_date')?.dirty)
+            "
+            class="error"
+          >
+            <small
+              *ngIf="recipientRegistationForm.get('birth_date')?.errors?.['required']"
+              >Date of birth is required.</small
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="address">Address:</label>
+        <textarea id="address" formControlName="address"></textarea>
+        <div
+          *ngIf="
+            recipientRegistationForm.get('address')?.invalid &&
+            (recipientRegistationForm.get('address')?.touched ||
+              recipientRegistationForm.get('address')?.dirty)
+          "
+          class="error"
+        >
+          <small
+            *ngIf="recipientRegistationForm.get('address')?.errors?.['required']"
+            >Address is required.</small
+          >
+        </div>
+      </div>
+      <div class="form-group flex">
+        <div>
+          <label for="postal_code">Postal Code:</label>
+          <input type="number" id="postal_code" formControlName="postal_code" />
+          <div
+            *ngIf="
+              recipientRegistationForm.get('postal_code')?.invalid &&
+              (recipientRegistationForm.get('postal_code')?.touched ||
+                recipientRegistationForm.get('postal_code')?.dirty)
+            "
+            class="error"
+          >
+            <small
+              *ngIf="recipientRegistationForm.get('postal_code')?.errors?.['required']"
+              >Postal code is required.</small
+            >
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="quantity_needed">Quantity Needed:</label>
+          <input
+            type="number"
+            id="quantity_needed"
+            formControlName="quantity_needed"
+          />
+        </div>
+      </div>
+
+      <button type="submit" (click)="c('Close click')">Register</button>
+    </form>
+  </div>
+</ng-template>
